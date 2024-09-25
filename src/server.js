@@ -29,6 +29,10 @@ app.get('/posts', (req, res) => {
 
     res.render('posts', context)
 })
+
+app.get('/user/', (req, res) => {
+    res.render('user')
+})
 app.listen(PORT, HOST, () => {
     console.log(`Server running at http://${HOST}:${PORT}/`)
 });
