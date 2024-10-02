@@ -10,8 +10,10 @@
     <h1>Posts</h1>
     <% posts.forEach((post) => { %>
         <div class = 'post'>
-            <h2><%=post.name %></h2>
-            <p><%=post.author %></p>
+            <h1><%= post.name%></h1>
+            <a href="<%= post.description %>">Description</a>
+            <h2><%= post.time%></h2>
+            <h3><%= post.author%></h3>
         </div>
     <% }) %>
     
