@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts</title>
-    <link rel="stylesheet" href="/static/posts.css">
+    <link rel="stylesheet" href="/static/css/posts.css">
+    <script src = '/static/js/posts.js' defer></script>
 </head>
 <body>
     <h1>Posts</h1>
@@ -16,6 +17,6 @@
             <h3><%= post.author%></h3>
         </div>
     <% }) %>
-    
+    <button type="button" id = 'button'>New post</button>
 </body>
 </html>

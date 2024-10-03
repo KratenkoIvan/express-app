@@ -41,7 +41,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'templates'))
 
 app.use('/static/', express.static(path.join(__dirname, 'static')))
-
+app.use(express.json())
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, './templates/index.html'))
 })
@@ -69,7 +69,11 @@ app.get('/post/:id', (req, res) => {
         res.render('error')
     }
 
-    
+})
+
+app.post('/post/create', (req, res) => {
+    const data = req.body
+    posts.push(data)
 })
 
 app.listen(PORT, HOST, () => {
