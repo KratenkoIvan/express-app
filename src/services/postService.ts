@@ -1,6 +1,6 @@
 // Сервис работает с данными и возвращает их в контроллер
 // Такая система упростит навигацию в проекте автору и возможным будущим авторам, сделает пользование проектом удобнее и улучшит его структуру
-const posts = [
+const posts:{name: string, description: string, time: string, author: string}[] = [
     {
         'name': 'name1',
         'description': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
@@ -33,14 +33,14 @@ const posts = [
     }
 ]
 
-function getAllPosts() {
+function getAllPosts(): {posts: {name: string, description: string, time: string, author: string}[]} {
     const context = {
         posts: posts
     }
     return context
 }
 
-function getPostById(id) {
+function getPostById(id: number): {context: {}, length: number} {
     const context = {
         post: posts[id - 1]
     }
@@ -50,12 +50,14 @@ function getPostById(id) {
     }
 }
 
-function createPost(data) {
-    posts.push(data)
+function createPost(data: { name: string, description: string, time: string, author: string}): undefined {
+    posts.push(data);
 }
 
-module.exports = {
+const postService = {
     getAllPosts: getAllPosts,
     getPostById: getPostById,
     createPost: createPost,
 }
+
+export default postService

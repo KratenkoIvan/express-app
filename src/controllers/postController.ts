@@ -1,14 +1,14 @@
 // Контроллер обрабатывает HTTP-запрос и формирует ответ
 // Такая система упростит навигацию в проекте автору и возможным будущим авторам, сделает пользование проектом удобнее и улучшит его структуру
-const postService = require('../services/postService')
-
-function getAllPosts(req, res) {
+import { Request, Response } from 'express'
+import postService from '../services/postService'
+function getAllPosts(req: Request, res: Response): undefined {
     const context = postService.getAllPosts()
     res.render('posts', context)
 }
 
-function getPostById(req, res) {
-    const id = req.params.id
+function getPostById(req: Request, res: Response): undefined {
+    const id: number = Number(req.params.id)
     const data = postService.getPostById(id)
     if (id <= data.length && id > 0){
         res.render('post', data.context)
@@ -17,14 +17,16 @@ function getPostById(req, res) {
     }
 }
 
-function createPost(req, res) {
+
+function createPost(req: Request, res: Response): undefined {
     const data = req.body
     postService.createPost(data)
 }
 
-
-module.exports = {
+const postController = {
     getAllPosts: getAllPosts,
     getPostById: getPostById,
     createPost: createPost,
 }
+
+export default postController

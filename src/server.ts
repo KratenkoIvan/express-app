@@ -1,9 +1,10 @@
-const moment = require('moment')
-const express = require('express')
-const path = require('path')
-const postRouter = require('./routers/postRouter')
+import express, { Express, Request, Response } from 'express'
+import path from 'path'
+import {postRouter} from './routers/postRouter'
 
-const app = express()
+
+
+const app: Express = express()
 const PORT = 8000
 const HOST = 'localhost'
 
@@ -14,7 +15,7 @@ app.use('/static/', express.static(path.join(__dirname, 'static')))
 app.use(express.json())
 app.use('/post/', postRouter)
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.render('index')
 })
 
