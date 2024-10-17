@@ -78,7 +78,100 @@ async function deletePost(){
     console.log(post)
 }
 
-createPost().then(() => {
+
+
+async function createComment(){
+    const comment = await prisma.comment.create({
+        data: {
+            body: 'first comment',
+            title: 'comment1',
+            postId: 1,
+        }
+    })
+    console.log(comment)
+}
+
+async function createComments(){
+    const comment = await prisma.comment.createMany({
+        data: [
+        {
+            body: 'first comment',
+            title: 'comment1',
+            postId: 1,
+        },
+        {
+            body: 'second comment',
+            title: 'comment2',
+            postId: 1,
+        },
+    ]
+    })
+    console.log(comment)
+}
+
+async function deleteComment(){
+    const comment = await prisma.comment.delete({
+        where: {
+            id: 1
+        }
+    })
+    console.log(comment)
+}
+
+async function findComment(){
+    const comment = await prisma.comment.findUnique({
+        where: {
+            id: 1
+        }
+    })
+    console.log(comment)
+}
+
+async function findCommentPost(){
+    const comment = await prisma.comment.findUnique({
+        where: {
+            id: 1
+        }
+    })
+    const post = await prisma.post.findUnique({
+        where: {
+            id: comment?.postId
+        },
+
+        include: {
+            comments: true
+        }
+    })
+    console.log(post)
+}
+
+async function findPostWithComments(){
+    const post = await prisma.post.findUnique({
+        where: {
+            id: 1
+        },
+
+        include: {
+            comments: true
+        }
+    })
+    console.log(post)
+}
+
+async function updateComment(){
+    const comment = await prisma.comment.update({
+        where: {
+            id: 2
+        },
+
+        data: {
+            body: 'this comment has been updated',
+            title: 'updated comment'
+        }
+    })
+}
+
+updateComment().then(() => {
     prisma.$disconnect()
 }).catch((err) => {
     console.log(err)
