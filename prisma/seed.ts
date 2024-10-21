@@ -171,7 +171,7 @@ async function updateComment(){
     })
 }
 
-updateComment().then(() => {
+createPost().then(() => {
     prisma.$disconnect()
 }).catch((err) => {
     console.log(err)

@@ -2,7 +2,7 @@
 // Такая система упростит навигацию в проекте автору и возможным будущим авторам, сделает пользование проектом удобнее и улучшит его структуру
 import express, { Router } from 'express'
 const router: Router = express.Router()
-import postController from '../controllers/postController'
+import postController from './postController'
 
 
 router.get('/all', postController.getAllPosts)

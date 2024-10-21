@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express'
 import path from 'path'
-import {postRouter} from './routers/postRouter'
+import {postRouter} from './PostApp/postRouter'
 
 
 
