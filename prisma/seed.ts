@@ -171,7 +171,19 @@ async function updateComment(){
     })
 }
 
-createPost().then(() => {
+async function createAdmin(){
+    const user = await prisma.user.create({
+        data: {
+            username: 'admin',
+            email: 'admin@admin',
+            password: 'admin',
+            role: 'admin'
+        },
+    })
+    console.log(user)
+}
+
+createAdmin().then(() => {
     prisma.$disconnect()
 }).catch((err) => {
     console.log(err)

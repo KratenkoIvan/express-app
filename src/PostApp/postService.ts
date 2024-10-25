@@ -15,9 +15,13 @@ async function getPostById(id: number) {
     const context = {
         post: await productRepository.getPostById(id)
     }
-    return {
-        context: context,
+
+    if (context.post){
+        return context
+    }else {
+        return undefined
     }
+    
 }
 
 async function createPost(data: Prisma.PostCreateInput){
