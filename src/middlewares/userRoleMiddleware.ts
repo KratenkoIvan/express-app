@@ -1,10 +1,12 @@
 import {Request, Response, NextFunction} from 'express';
+import { JwtPayload, verify } from 'jsonwebtoken';
+import { SECRET_KEY } from '../config/token';
 export function userRoleMiddleware(req: Request, res: Response, next: NextFunction){
     const cookies = req.cookies
-    const user = JSON.parse(cookies.user)
+    const user = verify(cookies.token, SECRET_KEY)
     console.log(user)
 
-    if(user.role == 'admin'){
+    if(typeof user == 'object' && user.role == 'admin'){
         console.log(user.role)
         next()
     } else {
