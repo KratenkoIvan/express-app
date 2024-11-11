@@ -29,7 +29,7 @@ async function  findUserByEmail(email: string) {
     }
 }
 
-async function createUser(data: {username: string, email: string, password: string}){
+async function createUser(data: Prisma.UserCreateInput){
     try{
         let user = await prisma.user.create({
             data: {
