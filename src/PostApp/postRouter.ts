@@ -16,5 +16,5 @@ router.get('/all', postController.getAllPosts)
 router.get('/:id', postController.getPostById)
 
 router.post('/create', userRoleMiddleware, postController.createPost)
-
+router.post('/delete', postController.deletePost)
 export {router as postRouter}

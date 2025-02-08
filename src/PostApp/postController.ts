@@ -24,10 +24,16 @@ async function createPost(req: Request, res: Response) {
     postService.createPost(data)
 }
 
+async function deletePost(req: Request, res: Response) {
+    const id: number = Number(req.params.id)
+    postService.deletePost(id)
+}
+
 const postController = {
     getAllPosts: getAllPosts,
     getPostById: getPostById,
     createPost: createPost,
+    deletePost: deletePost
 }
 
 export default postController

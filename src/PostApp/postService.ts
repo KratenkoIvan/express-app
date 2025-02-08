@@ -28,10 +28,16 @@ async function createPost(data: Prisma.PostCreateInput){
     await productRepository.createPost(data)
 }
 
+async function deletePost(id: number) {
+    await productRepository.deletePost(id)
+}
+
 const postService = {
     getAllPosts: getAllPosts,
     getPostById: getPostById,
     createPost: createPost,
+    deletePost: deletePost,
+ 
 }
 
 export default postService

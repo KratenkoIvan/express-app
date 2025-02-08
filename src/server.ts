@@ -3,6 +3,7 @@ import path from 'path'
 import {postRouter} from './PostApp/postRouter'
 import userRouter from './UserApp/userRouter'
 import cookieParser from 'cookie-parser'
+import { commentRouter } from './CommentApp/commentRouter'
 
 
 const app: Express = express()
@@ -16,6 +17,7 @@ app.use('/static/', express.static(path.join(__dirname, 'static')))
 app.use(express.json())
 app.use(cookieParser())
 app.use('/post/', postRouter)
+app.use('/comment/', commentRouter)
 app.use('', userRouter)
 
 app.get('/', (req: Request, res: Response) => {
