@@ -5,7 +5,17 @@ async function getCommentsByPostId(req: Request, res: Response) {
     const postId: number = Number(req.params.id)
     const context = await commentService.getCommentsByPostId(postId)
     if (context){
-        res.render('comment', context)
+        res.render('comments', context)
+    } else{
+        res.render('error')
+    }
+}
+
+async function getCommentsByUserId(req: Request, res: Response) {
+    const userId: number = Number(req.params.id)
+    const context = await commentService.getCommentsByUserId(userId)
+    if (context){
+        res.render('comments', context)
     } else{
         res.render('error')
     }
@@ -20,7 +30,9 @@ async function createCommentForPost(req: Request, res: Response) {
 
 const commentController = {
     getCommentsByPostId: getCommentsByPostId,
-    createCommentForPost: createCommentForPost
+    getCommentsByUserId: getCommentsByUserId,
+    createCommentForPost: createCommentForPost,
+
 }
 
 export default commentController

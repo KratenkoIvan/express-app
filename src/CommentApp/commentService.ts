@@ -14,12 +14,26 @@ async function getCommentsByPostId(postId: number) {
     
 }
 
+async function getCommentsByUserId(postId: number) {
+    const context = {
+        comments: await commentRepository.getCommentsByUserId(postId)
+    }
+
+    if (context.comments){
+        return context
+    }else {
+        return undefined
+    }
+    
+}
+
 async function createCommentForPost(postId: number, data: Prisma.CommentCreateInput){
     await commentRepository.createCommentForPost(postId, data)
 }
 
 const commentService = {
     getCommentsByPostId: getCommentsByPostId,
+    getCommentsByUserId: getCommentsByUserId, 
     createCommentForPost: createCommentForPost,
 }
 
