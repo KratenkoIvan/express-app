@@ -5,28 +5,40 @@ import postService from './postService'
 
 async function getAllPosts(req: Request, res: Response) {
     const context = await postService.getAllPosts()
-    res.render('posts', context)
+    
+    if (context.status === 'error'){
+        res.send('error')
+    } else{
+        console.log(context.data)
+        res.render('posts', {posts: context.data})
+    }
 }
 
 async function getPostById(req: Request, res: Response) {
     const id: number = Number(req.params.id)
     const context = await postService.getPostById(id)
-    if (context){
-        res.render('post', context)
+    if (context.status === 'error'){
+        res.send('error')
     } else{
-        res.render('error')
+        res.render('post', {post: context.data})
     }
 }
 
 
 async function createPost(req: Request, res: Response) {
     const data = await req.body
-    postService.createPost(data)
+    const result = await postService.createPost(data)
+    
+    if (result.status === 'error'){
+        res.send('error')
+    } else{
+        res.send('ok')
+    }
 }
 
 async function deletePost(req: Request, res: Response) {
     const id: number = Number(req.params.id)
-    postService.deletePost(id)
+    const result = postService.deletePost(id)
 }
 
 const postController = {

@@ -1,19 +1,9 @@
+import { IError, ISuccess } from "../types/types"
 import userRepository from "./userRepository"
-import {Prisma} from '@prisma/client'
+import { CreateUser, User } from "./userTypes"
 
 
-interface IUserSuccess{
-    status: 'success',
-    data: Prisma.UserCreateInput
-}
-
-interface IUserError{
-    status: 'error',
-    message: string
-}
-
-
-async function authLogin(email: string, password: string): Promise< IUserError | IUserSuccess> {
+async function authLogin(email: string, password: string): Promise< IError | ISuccess<User>> {
     const user = await userRepository.findUserByEmail(email)
     if (!user) {
         return {status: 'error', message: "User does not exist."}
@@ -28,7 +18,7 @@ async function authLogin(email: string, password: string): Promise< IUserError |
 
 
 
-async function authRegister(data: Prisma.UserCreateInput): Promise< IUserError | IUserSuccess > {
+async function authRegister(data: CreateUser): Promise< IError | ISuccess<User> > {
     const user = await userRepository.findUserByEmail(data.email)
 
     if (user) {

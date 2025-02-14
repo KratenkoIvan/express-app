@@ -1,34 +1,36 @@
 import {Prisma} from '@prisma/client'
 import commentRepository from "./commentRepository"
+import { IError, ISuccess } from '../types/types'
+import { Comment, CreateComment } from './commentTypes'
 
-async function getCommentsByPostId(postId: number) {
-    const context = {
-        comments: await commentRepository.getCommentsByPostId(postId)
-    }
+async function getCommentsByPostId(postId: number): Promise<IError | ISuccess<Comment[]>>{
+    const comments = await commentRepository.getCommentsByPostId(postId)
 
-    if (context.comments){
-        return context
-    }else {
-        return undefined
+    if(!comments){
+        return {status: 'error', message:'No comments by this post'}
     }
-    
+    return {status: 'success', data: comments}
 }
 
-async function getCommentsByUserId(postId: number) {
-    const context = {
-        comments: await commentRepository.getCommentsByUserId(postId)
-    }
+async function getCommentsByUserId(userId: number): Promise<IError | ISuccess<Comment[]>> {
+    const comments = await commentRepository.getCommentsByPostId(userId)
 
-    if (context.comments){
-        return context
-    }else {
-        return undefined
+    if(!comments){
+        return {status: 'error', message:'No comments by this user'}
     }
-    
+    return {status: 'success', data: comments}
 }
 
-async function createCommentForPost(postId: number, data: Prisma.CommentCreateInput){
-    await commentRepository.createCommentForPost(postId, data)
+async function createCommentForPost(postId: number, data: CreateComment): Promise<IError | ISuccess<Comment>>{
+    let comment = await commentRepository.createCommentForPost(postId, data)
+
+    if (!comment){
+        return {
+            status: 'error',
+            message: 'Failed to create post'
+        }
+    }
+    return {status:'success', data: comment}
 }
 
 const commentService = {

@@ -86,6 +86,7 @@ async function createComment(){
             body: 'first comment',
             title: 'comment1',
             postId: 1,
+            userId: 1,
         }
     })
     console.log(comment)
@@ -98,11 +99,13 @@ async function createComments(){
             body: 'first comment',
             title: 'comment1',
             postId: 1,
+            userId: 1,
         },
         {
             body: 'second comment',
             title: 'comment2',
             postId: 1,
+            userId: 1,
         },
     ]
     })
@@ -183,7 +186,7 @@ async function createAdmin(){
     console.log(user)
 }
 
-createAdmin().then(() => {
+createPosts().then(() => {
     prisma.$disconnect()
 }).catch((err) => {
     console.log(err)

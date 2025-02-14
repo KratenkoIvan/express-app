@@ -1,5 +1,6 @@
 import prisma from "../client/prismaClient"
 import {Prisma} from '@prisma/client'
+import { errors, IErrors } from "../config/errorCodes"
 
 async function getAllPosts(){
     try{
@@ -7,21 +8,11 @@ async function getAllPosts(){
 
         })
         return posts
-    } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
             }
         }
     }
@@ -36,21 +27,11 @@ async function getPostById(id: number){
             }
         })
         return post
-    } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
             }
         }
     }
@@ -62,21 +43,11 @@ async function createPost(data: Prisma.PostCreateInput){
             data: data
         })
         return post
-    } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
             }
         }
     }
@@ -90,21 +61,11 @@ async function deletePost(id: number){
             }
         })
         return post
-    } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
             }
         }
     }
@@ -118,21 +79,11 @@ async function getAllPostsWithComments(){
             }
         })
         return posts
-    } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
             }
         }
     }
@@ -149,21 +100,11 @@ async function getOnePostWithComments(id: number){
             }
         })
         return post
-    } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
             }
         }
     }

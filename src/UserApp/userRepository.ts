@@ -1,5 +1,6 @@
 import prisma from "../client/prismaClient"
 import { Prisma } from "@prisma/client"
+import { errors, IErrors } from "../config/errorCodes"
 
 async function  findUserByEmail(email: string) {
     try{
@@ -9,24 +10,14 @@ async function  findUserByEmail(email: string) {
             }
         })
         return user
-    }catch(err){
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    }catch (error) {
+            if (error instanceof Prisma.PrismaClientKnownRequestError){
+                if (error.code in Object.keys(errors)){
+                    const errorKey: keyof IErrors = error.code
+                    console.log(errors[errorKey])
+                }
             }
         }
-    }
 }
 
 async function createUser(data: Prisma.UserCreateInput){
@@ -40,24 +31,14 @@ async function createUser(data: Prisma.UserCreateInput){
             }
         })
         return user
-    } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2002"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2015"){
-                console.log(err.message)
-                throw err
-            }
-        } else if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == "P2019"){
-                console.log(err.message)
-                throw err
+    } catch (error) {
+            if (error instanceof Prisma.PrismaClientKnownRequestError){
+                if (error.code in Object.keys(errors)){
+                    const errorKey: keyof IErrors = error.code
+                    console.log(errors[errorKey])
+                }
             }
         }
-    }
 }
 
 const userRepository = {
