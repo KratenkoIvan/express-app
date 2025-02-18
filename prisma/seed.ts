@@ -186,7 +186,33 @@ async function createAdmin(){
     console.log(user)
 }
 
-createPosts().then(() => {
+async function createPostWithComments(){
+    const post = await prisma.post.create({
+        data: {
+            name: 'name1',
+            description: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            time: '11.09.2001',
+            author: 'author1',
+            comments: {
+                create: [
+                    {
+                        body: 'first comment',
+                        title: 'comment1',
+                        userId: 1,
+                    },
+                    {
+                        body:'second comment',
+                        title: 'comment2',
+                        userId: 1,
+                    },
+                ]
+            }
+        }
+    })
+    console.log(post)
+}
+
+createPostWithComments().then(() => {
     prisma.$disconnect()
 }).catch((err) => {
     console.log(err)

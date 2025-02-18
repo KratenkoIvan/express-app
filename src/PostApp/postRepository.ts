@@ -1,6 +1,7 @@
 import prisma from "../client/prismaClient"
 import {Prisma} from '@prisma/client'
 import { errors, IErrors } from "../config/errorCodes"
+import { CreatePost } from "./postTypes"
 
 async function getAllPosts(){
     try{
@@ -37,7 +38,7 @@ async function getPostById(id: number){
     }
 }
 
-async function createPost(data: Prisma.PostCreateInput){
+async function createPost(data: CreatePost){
     try{
         let post = await prisma.post.create({
             data: data
@@ -114,7 +115,9 @@ const productRepository = {
     getAllPosts: getAllPosts,
     getPostById: getPostById,
     createPost: createPost,
-    deletePost: deletePost
-}
+    deletePost: deletePost,
+    getOnePostWithComments
+ };
+
 
 export default productRepository

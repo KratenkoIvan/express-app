@@ -2,7 +2,7 @@
 // Такая система упростит навигацию в проекте автору и возможным будущим авторам, сделает пользование проектом удобнее и улучшит его структуру
 import productRepository from "./postRepository"
 import { IError, ISuccess } from '../types/types'
-import { CreatePost, Post } from './postTypes'
+import { CreatePost, Post, PostWithComments } from './postTypes'
 
 
 async function getAllPosts(): Promise<ISuccess<Post[]> | IError> {
@@ -27,6 +27,17 @@ async function getPostById(id: number): Promise<ISuccess<Post> | IError> {
         }
     }
     
+    return {status: 'success', data: post}
+}
+
+async function getOnePostWithComments(id: number): Promise<ISuccess<PostWithComments> | IError> {
+    const post = await productRepository.getOnePostWithComments(id)
+    if (!post) {
+        return {
+            status: 'error',
+            message: 'Post not found'
+        }
+    }
     return {status: 'success', data: post}
 }
 
@@ -57,7 +68,8 @@ const postService = {
     getPostById: getPostById,
     createPost: createPost,
     deletePost: deletePost,
- 
-}
+    getOnePostWithComments: getOnePostWithComments,
+ };
+
 
 export default postService
