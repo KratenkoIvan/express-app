@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import { commentRouter } from './CommentApp/commentRouter'
 import postRouterApi from './PostApp/postRouterApi'
 import cors from 'cors'
+import tagRouterApi from './TagApp/tagRouterApi'
 
 const app: Express = express()
 const PORT = 8000
@@ -25,6 +26,7 @@ app.use('/static/', express.static(path.join(__dirname, 'static')))
 app.use('/post/', postRouter)
 app.use('/comment/', commentRouter)
 app.use('/api/post/', postRouterApi)
+app.use('/api/tag/', tagRouterApi)
 app.use('/', userRouter)
 
 app.get('/', (req: Request, res: Response) => {

@@ -10,10 +10,13 @@ async function createPost(){
             description: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
             time: '11.09.2001',
             author: 'author1',
+            tagId: 3,
         }
     })
     console.log(post)
 }
+
+
 
 async function createPosts(){
     const post = await prisma.post.createMany({
@@ -23,12 +26,14 @@ async function createPosts(){
             description: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
             time: '11.09.2001',
             author: 'author2',
+            tagId: 1,
         },
         {
             name: 'name3',
             description: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
             time: '11.09.2001',
             author: 'author3',
+            tagId: 1,
         },
     ]
         
@@ -193,6 +198,7 @@ async function createPostWithComments(){
             description: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
             time: '11.09.2001',
             author: 'author1',
+            tagId: 1,
             comments: {
                 create: [
                     {
@@ -212,7 +218,16 @@ async function createPostWithComments(){
     console.log(post)
 }
 
-createPostWithComments().then(() => {
+async function createTag(){
+    const tag = await prisma.tag.create({
+        data: {
+            name: 'food'
+        }
+    })
+    console.log(tag)
+}
+
+createPost().then(() => {
     prisma.$disconnect()
 }).catch((err) => {
     console.log(err)
