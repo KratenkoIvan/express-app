@@ -1,7 +1,7 @@
 import { IError, ISuccess } from "../types/types"
 import userRepository from "./userRepository"
 import { CreateUser, User } from "./userTypes"
-
+import { compare, hash, hashSync } from 'bcrypt'
 
 async function authLogin(email: string, password: string): Promise< IError | ISuccess<User>> {
     const user = await userRepository.findUserByEmail(email)
@@ -9,11 +9,13 @@ async function authLogin(email: string, password: string): Promise< IError | ISu
         return {status: 'error', message: "User does not exist."}
     }
     
-    if (user.password != password) {
-        return {status: 'error', message: "Passwords do not match."}
+    const match = await compare(password, user.password);
+    
+    if (!match) {
+        return {status: 'error', message: 'Incorrect password.'}
     }
 
-    return {status: 'success', data: user}
+    return {status:'success', data: user}
 }
 
 
@@ -25,7 +27,16 @@ async function authRegister(data: CreateUser): Promise< IError | ISuccess<User> 
         return {status: 'error', message: 'User already exists.'}
     }
 
-    const newUser = await userRepository.createUser(data)
+    const passwordHash = hashSync(data.password, 10)
+
+    const newUser = await userRepository.createUser(
+        {
+            email: data.email,
+            password: passwordHash,
+            username: data.username,
+            role: data.role,
+        }
+    )
 
     if (!newUser) {
         console.log(newUser)

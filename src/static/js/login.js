@@ -1,6 +1,6 @@
 form.addEventListener('submit', (event) => {
     event.preventDefault()
-    fetch('', {
+    fetch('/api/user/login', {
         method: 'POST',
         body: JSON.stringify({
             email: email.value,
