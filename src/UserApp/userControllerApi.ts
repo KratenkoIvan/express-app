@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import userService from './userService';
-import { SECRET_KEY } from '../config/token';
-import { sign } from 'jsonwebtoken';
+
 
 async function authLogin(req: Request, res:Response){
     const data = await req.body
@@ -11,8 +10,7 @@ async function authLogin(req: Request, res:Response){
         return
     }
     
-    const token = sign(result.data, SECRET_KEY, {expiresIn: '1h'})
-    res.json({status: 'success', data: token})
+    res.json(result)
     
 }
 
@@ -24,15 +22,22 @@ async function authRegister(req: Request, res: Response){
         return
     }
 
-    const token = sign(result.data, SECRET_KEY, {expiresIn: '1h'})
-    res.json({status: 'success', data: token})
+    res.json(result)
+    
+}
+
+async function getUserById(req: Request, res: Response){
+    const userId = res.locals.userId
+    const result = await userService.getUserById(+userId)
+    res.json(result)
     
 }
 
 const userController = {
     authLogin: authLogin,
-    authRegister: authRegister
-}
+    authRegister: authRegister,
+    getUserById: getUserById,
+ }
 
 
 export default userController

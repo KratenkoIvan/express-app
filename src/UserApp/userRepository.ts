@@ -1,6 +1,7 @@
 import prisma from "../client/prismaClient"
 import { Prisma } from "@prisma/client"
 import { errors, IErrors } from "../config/errorCodes"
+import { User } from "./userTypes"
 
 async function  findUserByEmail(email: string) {
     try{
@@ -41,9 +42,28 @@ async function createUser(data: Prisma.UserCreateInput){
         }
 }
 
+async function getUserById(userId: number){
+    try{
+        let user = await prisma.user.findUnique({
+            where: {
+                id: userId
+            }
+        })
+        return user
+    } catch (error) {
+            if (error instanceof Prisma.PrismaClientKnownRequestError){
+                if (error.code in Object.keys(errors)){
+                    const errorKey: keyof IErrors = error.code
+                    console.log(errors[errorKey])
+                }
+            }
+        }
+}
+
 const userRepository = {
     findUserByEmail: findUserByEmail,
-    createUser: createUser
+    createUser: createUser,
+    getUserById: getUserById,
 }
 
 export default userRepository

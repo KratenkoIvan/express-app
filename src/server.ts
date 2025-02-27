@@ -8,6 +8,9 @@ import postRouterApi from './PostApp/postRouterApi'
 import cors from 'cors'
 import tagRouterApi from './TagApp/tagRouterApi'
 import userRouterApi from './UserApp/userRouterApi'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app: Express = express()
 const PORT = 8000
