@@ -5,12 +5,14 @@ import userService from './userService';
 async function authLogin(req: Request, res:Response){
     const data = await req.body
     const result = await userService.authLogin(data.email, data.password)
-    if (result.status == 'error') {
-        res.json(result)
-        return
-    }
-    
     res.json(result)
+    
+    // if (result.status == 'error') {
+    //     res.json(result)
+    //     return
+    // }
+    
+    // res.json(result)
     
 }
 

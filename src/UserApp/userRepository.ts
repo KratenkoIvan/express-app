@@ -1,6 +1,7 @@
 import prisma from "../client/prismaClient"
 import { Prisma } from "@prisma/client"
 import { errors, IErrors } from "../config/errorCodes"
+// не нада
 import { User } from "./userTypes"
 
 async function  findUserByEmail(email: string) {
@@ -12,6 +13,7 @@ async function  findUserByEmail(email: string) {
         })
         return user
     }catch (error) {
+        // types вынести
             if (error instanceof Prisma.PrismaClientKnownRequestError){
                 if (error.code in Object.keys(errors)){
                     const errorKey: keyof IErrors = error.code
@@ -33,6 +35,7 @@ async function createUser(data: Prisma.UserCreateInput){
         })
         return user
     } catch (error) {
+        // табуляции
             if (error instanceof Prisma.PrismaClientKnownRequestError){
                 if (error.code in Object.keys(errors)){
                     const errorKey: keyof IErrors = error.code

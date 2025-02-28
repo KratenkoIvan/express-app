@@ -2,6 +2,15 @@ import {Request, Response, NextFunction} from 'express';
 import { verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '../config/token';
 
+// iat - issuedAt -> когда был создан токен 1234235142312
+// exp - expiredAt -> когда токен закончится 2341253647573
+
+interface IToken {
+    id: number,
+    iat: number,
+    exp: number
+}
+
 export async function authTokenMiddleware(req: Request, res: Response, next: NextFunction){
     const authHeader = req.headers.authorization
     if (!authHeader) {
@@ -18,8 +27,9 @@ export async function authTokenMiddleware(req: Request, res: Response, next: Nex
     const token = splitedToken[1];
     
     try{
-        const decodedToken = verify(token, SECRET_KEY);
-        res.locals.userId = decodedToken;
+        const decodedToken = verify(token, SECRET_KEY) as IToken;
+        console.log(decodedToken)
+        res.locals.userId = Number(decodedToken.id);
         next();
 
     }catch (err) {

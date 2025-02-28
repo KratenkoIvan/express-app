@@ -1,3 +1,4 @@
+// не нада
 import {Prisma} from '@prisma/client'
 import commentRepository from "./commentRepository"
 import { IError, ISuccess } from '../types/types'

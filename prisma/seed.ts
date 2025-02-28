@@ -227,7 +227,7 @@ async function createTag(){
     console.log(tag)
 }
 
-createPost().then(() => {
+createAdmin().then(() => {
     prisma.$disconnect()
 }).catch((err) => {
     console.log(err)
