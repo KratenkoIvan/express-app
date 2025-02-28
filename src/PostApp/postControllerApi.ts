@@ -14,8 +14,6 @@ async function getOnePostWithComments(req: Request, res:Response) {
     res.json(result)
 }
 
-
-
 const postControllerApi ={
     getAllPosts: getAllPosts,
     getOnePostWithComments: getOnePostWithComments,

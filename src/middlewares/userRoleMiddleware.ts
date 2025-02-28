@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
-import { JwtPayload, verify } from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '../config/token';
 export function userRoleMiddleware(req: Request, res: Response, next: NextFunction){
     const cookies = req.cookies

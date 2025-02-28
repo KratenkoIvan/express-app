@@ -1,14 +1,14 @@
 import express, { Express, Request, Response } from 'express'
 import path from 'path'
-import {postRouter} from './PostApp/postRouter'
-import userRouter from './UserApp/userRouter'
-import cookieParser from 'cookie-parser'
-import { commentRouter } from './CommentApp/commentRouter'
-import postRouterApi from './PostApp/postRouterApi'
 import cors from 'cors'
+import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+import {postRouter} from './PostApp/postRouter'
+import { commentRouter } from './CommentApp/commentRouter'
+import userRouter from './UserApp/userRouter'
+import postRouterApi from './PostApp/postRouterApi'
 import tagRouterApi from './TagApp/tagRouterApi'
 import userRouterApi from './UserApp/userRouterApi'
-import dotenv from 'dotenv'
 
 dotenv.config()
 

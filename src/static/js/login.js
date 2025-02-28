@@ -7,7 +7,9 @@ form.addEventListener('submit', (event) => {
             password: password.value
         }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer: token'
+            
         }
     })
 })

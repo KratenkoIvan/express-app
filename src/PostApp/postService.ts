@@ -1,5 +1,3 @@
-// Сервис работает с данными и возвращает их в контроллер
-// Такая система упростит навигацию в проекте автору и возможным будущим авторам, сделает пользование проектом удобнее и улучшит его структуру
 import productRepository from "./postRepository"
 import { IError, ISuccess } from '../types/types'
 import { CreatePost, Post, PostWithComments } from './postTypes'

@@ -1,4 +1,3 @@
-import {Prisma} from '@prisma/client'
 import commentRepository from "./commentRepository"
 import { IError, ISuccess } from '../types/types'
 import { Comment, CreateComment } from './commentTypes'
