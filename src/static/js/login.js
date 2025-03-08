@@ -8,8 +8,7 @@ form.addEventListener('submit', (event) => {
         }),
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer: token'
-            
+            'login': 'Bearer: token'
         }
     })
 })

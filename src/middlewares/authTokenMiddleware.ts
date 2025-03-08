@@ -9,7 +9,7 @@ interface IToken {
 }
 
 export async function authTokenMiddleware(req: Request, res: Response, next: NextFunction){
-    const authHeader = req.headers.authorization
+    const authHeader = req.headers['login'] as string;
     if (!authHeader) {
         res.status(401).json({status: 'error', message: "Authorization header is missing" });
         return
